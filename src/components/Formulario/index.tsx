@@ -4,11 +4,15 @@ import Botao from "../Botao";
 import style from './Formulario.module.scss';
 import { v4 as uuidv4 } from 'uuid';
 
-function Formulario({ setTarefa }: { setTarefa: React.Dispatch<React.SetStateAction<ITarefa[]>>}) {
+interface Props { 
+  setTarefas: React.Dispatch<React.SetStateAction<ITarefa[]>>
+};
+
+function Formulario({ setTarefas }: Props) {
   const [novaTarefa, setNovaTarefa] = useState('');
   const [tempo, setTempo] = useState('00:00');
 
-  const adicionarTarefa = (evento: React.FormEvent<HTMLFormElement>) => {
+  function adicionarTarefa(evento: React.FormEvent<HTMLFormElement>) {
     evento.preventDefault();
 
     const novaTarefaArray = {
@@ -16,7 +20,7 @@ function Formulario({ setTarefa }: { setTarefa: React.Dispatch<React.SetStateAct
       tempo: tempo
     }
 
-    setTarefa(tarefasAntigas => [
+    setTarefas(tarefasAntigas => [
       ...tarefasAntigas, {
         ...novaTarefaArray,
         selecionado: false,

@@ -1,9 +1,19 @@
 import React from "react";
 import style from './Botao.module.scss';
 
-function Botao({ children, type = 'button' }: { children: string, type? : 'button' | 'submit' | 'reset' | undefined }) {
+interface Props { 
+  children?: React.ReactNode, 
+  type? : 'button' | 'submit' | 'reset' | undefined, 
+  onClick?: () => void 
+};
+
+function Botao({ 
+  children, 
+  type = 'button', 
+  onClick 
+}: Props) {
   return (
-    <button type={type} className={style.botao}>
+    <button type={type} className={style.botao} onClick={onClick}>
       { children }
     </button>
   );

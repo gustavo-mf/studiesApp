@@ -2,7 +2,12 @@ import { ITarefa } from '../../types/ITarefa';
 import Item from './Item/intex';
 import style from './Lista.module.scss';
 
-function Lista({ tarefas }: { tarefas: ITarefa[] }) {
+interface Props {
+  tarefas: ITarefa[],
+  selecionaTarefa: (selecionaTarefa: ITarefa) => void
+}
+
+function Lista({ tarefas, selecionaTarefa }: Props) {
   return (
     <aside className={style.listaTarefas}>
       <h2>
@@ -10,9 +15,10 @@ function Lista({ tarefas }: { tarefas: ITarefa[] }) {
       </h2>
 
       <ul>
-        {tarefas.map((item, index) =>
+        {tarefas.map((item) =>
           <Item
-            key={index}
+            selecionaTarefa={selecionaTarefa}
+            key={item.id}
             {...item}
           />
         )}
